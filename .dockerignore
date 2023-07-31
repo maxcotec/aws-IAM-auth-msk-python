@@ -1,0 +1,11 @@
+*.pyc
+.DS_Store
+.git
+.gitignore
+.idea
+.venv
+.env
+.dev
+deployment/
+terraform/
+README.md

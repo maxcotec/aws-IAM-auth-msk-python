@@ -1,0 +1,27 @@
+FROM python:3.8-slim as envs
+
+# Move into a project directory and copy in all required files (using .dockerignore)
+WORKDIR /app
+COPY .. /app/
+
+# Update & Upgrade
+RUN apt-get update
+RUN apt-get -y upgrade
+
+# Install dependencies
+RUN apt-get -y install nano vim tar wget default-jre
+
+# Download kafka
+RUN wget https://downloads.apache.org/kafka/3.4.1/kafka_2.12-3.4.1.tgz \
+    && tar -xzvf kafka_2.12-3.4.1.tgz \
+    && rm -rf kafka_2.12-3.4.1.tgz
+
+RUN wget https://github.com/aws/aws-msk-iam-auth/releases/download/v1.1.6/aws-msk-iam-auth-1.1.6-all.jar \
+    && mv aws-msk-iam-auth-1.1.6-all.jar kafka_2.12-3.4.1/libs
+
+RUN printf 'security.protocol=SASL_SSL  \n\
+sasl.mechanism=AWS_MSK_IAM              \n\
+sasl.jaas.config=software.amazon.msk.auth.iam.IAMLoginModule required;    \n\
+sasl.client.callback.handler.class=software.amazon.msk.auth.iam.IAMClientCallbackHandler \
+' >> kafka_2.12-3.4.1/client.properties
+
