@@ -12,6 +12,12 @@ get pass this AWS IAM auth layer.
 This is a sneaky way of getting around to this problem by using python subprocess to access kafka-console tools to access 
 kafka cluster. 
 
+Watch Videos tutorials:
+
+Part 1: [AWS msk kafka tutorial | Access IAM authentication](https://youtu.be/r12HYxWAJLo) 
+
+Part 2: IAM auth enabled auth kafka acces via Python (Coming soon) 
+
 ## IAM permissions
 before running this code, make sure you have correct IAM permissions assigned. 
 ### Read-only policy
@@ -115,6 +121,11 @@ python main.py --sub-topic test-topic2 --kafka-servers <bootstrap-servers> --pub
 ```
 
 ### cli Instructions
+
+Create topic;
+```js
+./kafka_2.12-3.4.1/bin/kafka-topics.sh --bootstrap-server <bootstrap-servers> --replication-factor 2 --partition 1 --topic <topic-name> --command-config ./kafka_2.12-3.4.1/client.properties
+```
 
 Producer (export read-write iam user credentials):
 ```js
