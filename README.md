@@ -136,3 +136,16 @@ Consumer (export read-only iam user credentials):
 ```js
 ./kafka_2.12-3.4.1/bin/kafka-console-consumer.sh --bootstrap-server <bootstrap-servers> --topic test-topic --consumer.config kafka_2.12-3.4.1/client.properties --group reader-group
 ```
+
+### Common Issues/Errors:
+1. Error: [Uncaught Exception in thread 'kafka-admin-client-thread java.lang.OutOfMemoryError: Javaheap space'](https://www.youtube.com/watch?v=r12HYxWAJLo&t=477s)
+
+Reason: Caused because we didn't provided client.properties files with kafka-topics.sh script. provide the following option when running kafka-topics.sh script; `--command-config ./kafka_2.12-3.4.1/client.properties`
+
+2. Error: [Bootstrap-broker (id: -1 rack: null) disconnected](https://www.youtube.com/watch?v=r12HYxWAJLo&t=557s) 
+
+Reason: Again caused due to not providing client-properties file. provide the following option when running kafka-console-producer.sh script; `--producer.config kafka_2.12-3.4.1/client.properties`
+
+3. Error: [Not authorised to access group](https://www.youtube.com/watch?v=r12HYxWAJLo&t=648s)
+
+Reason: because we have restricted consumer IAM user to access group named `reader-group`, thats why we have to specifically provide consumer group name with kafka-console-consumer.sh script. `--consumer.config kafka_2.12-3.4.1/client.properties --group reader-group`
