@@ -16,7 +16,7 @@ Watch Videos tutorials:
 
 Part 1: [AWS msk kafka tutorial | Access IAM authentication](https://youtu.be/r12HYxWAJLo) 
 
-Part 2: IAM auth enabled auth kafka acces via Python (Coming soon) 
+Part 2: [AWS msk kafka tutorial | Access IAM authentication via Python](https://youtu.be/xL5wFLF4nrk)
 
 ## IAM permissions
 before running this code, make sure you have correct IAM permissions assigned. 
